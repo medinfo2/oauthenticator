@@ -109,7 +109,7 @@ class GoogleOAuthenticator(OAuthenticator, GoogleOAuth2Mixin):
         if self.hosted_domain:
             if (
                 user_email_domain not in self.hosted_domain or
-                bodyjs['hd'] not in self.hosted_domain
+                ('hd' in bodyjs and bodyjs['hd'] not in self.hosted_domain)
             ):
                 self.log.warning("Google OAuth unauthorized domain attempt: %s", user_email)
                 raise HTTPError(403,
